@@ -107,6 +107,7 @@ def start():
         return render_template('home.html', names=names, rolls=rolls, times=times, l=l, totalreg=totalreg(), datetoday2=datetoday2, mess='There is no trained model in the static folder. Please add a new face to continue.')
 
     ret = True
+    identified_person = None
     cap = cv2.VideoCapture(0)
     while ret:
         ret, frame = cap.read()
@@ -116,7 +117,7 @@ def start():
             cv2.rectangle(frame, (x, y), (x+w, y-40), (86, 32, 251), -1)
             face = cv2.resize(frame[y:y+h, x:x+w], (50, 50))
             identified_person = identify_face(face.reshape(1, -1))[0]
-            add_attendance(identified_person)
+            #add_attendance(identified_person)
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 1)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(50,50,255),2)
             cv2.rectangle(frame,(x,y-40),(x+w,y),(50,50,255),-1)
@@ -124,10 +125,12 @@ def start():
             cv2.rectangle(frame, (x,y), (x+w, y+h), (50,50,255), 1)
         imgBackground[162:162 + 480, 55:55 + 640] = frame
         cv2.imshow('Attendance', imgBackground)
-        if cv2.waitKey(1) == 27:
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+    add_attendance(identified_person)
     cap.release()
     cv2.destroyAllWindows()
+
     names, rolls, times, l = extract_attendance()
     return render_template('home.html', names=names, rolls=rolls, times=times, l=l, totalreg=totalreg(), datetoday2=datetoday2)
 
