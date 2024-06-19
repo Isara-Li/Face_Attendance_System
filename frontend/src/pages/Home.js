@@ -1,6 +1,9 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Appbar from '../components/Appbar';
+import Card from '../components/Card';
+
 
 export default function Home() {
   const handleAddUser = async () => {
@@ -13,9 +16,29 @@ export default function Home() {
   };
 
   return (
-    <div>
-      Home
-      <Button variant="contained" onClick={handleAddUser}>Add User</Button>
+    <div className="bg-[#c9c7c7] p-4">
+      <Appbar />
+
+        <h1 className="text-2xl font-bold mb-4">Hodm,dme</h1>
+     
+     
+        <div className="flex flex-col items-center gap-6 p-10 px-3 max-w-6xl mx-auto">
+        <div className="flex flex-row flex-wrap justify-center gap-6">
+        <Card
+                        image="https://cdn2.vectorstock.com/i/1000x1000/52/91/user-icon-human-person-sign-vector-10725291.jpg"
+                        title="Register New User"
+                       
+                    />
+                    <Card
+                        image="https://media.istockphoto.com/id/1397317693/vector/user-group-and-management-business-team-check-mark-sign-check-mark-person-vector-illustration.jpg?s=612x612&w=0&k=20&c=V1UUiXrdq89Fxn_Q-pRb2E2nyu6eM_WzDZDUwdZ5LS4="
+                        title="Mark Attendence"
+                       
+                    />
+                    </div>
+                    </div>
+                  
+      
     </div>
   );
 }
+
