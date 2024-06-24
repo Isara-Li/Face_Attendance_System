@@ -4,13 +4,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 
-export default function MultiActionAreaCard({ image, title, description }) {
+export default function MultiActionAreaCard({ image, title, description, onClick }) {
     return (
         <Card className="w-64 p-4 bg-white rounded-lg shadow-md">
-           
-            <CardActionArea>
+            <CardActionArea onClick={onClick}>
                 <CardMedia
                     component="img"
                     image={image}
@@ -27,9 +26,8 @@ export default function MultiActionAreaCard({ image, title, description }) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-            
+                {/* You can add action buttons here if needed */}
             </CardActions>
-     
         </Card>
     );
 }
@@ -39,4 +37,5 @@ MultiActionAreaCard.propTypes = {
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    onClick: PropTypes.func, // Added onClick prop
 };

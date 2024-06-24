@@ -1,13 +1,16 @@
-import React from 'react';
-import Button from '@mui/material/Button';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Appbar from '../components/Appbar';
-import Card from '../components/Card';
+import MultiActionAreaCard from '../components/MultiActionAreaCard'; // Ensure the import path is correct
+import CustomizedDialogs from '../components/CustomizedDialogs'; // Ensure the import path is correct
 import { motion } from "framer-motion";
-import { MDBBtn, MDBContainer } from 'mdb-react-ui-kit';
 import ReactTypingEffect from 'react-typing-effect';
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const handleAddUser = async () => {
     try {
       const response = await axios.get('http://localhost:5000/start');
@@ -15,6 +18,19 @@ export default function Home() {
     } catch (error) {
       console.error('Error:', error);
     }
+  };
+
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  const handleSaveChanges = () => {
+    setDialogOpen(false);
+    navigate('/register');
   };
 
   const cardVariants = {
@@ -69,9 +85,11 @@ export default function Home() {
             variants={cardVariants}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Card
+            <MultiActionAreaCard
               image="https://cdn2.vectorstock.com/i/1000x1000/52/91/user-icon-human-person-sign-vector-10725291.jpg"
               title="Register User"
+              description=""
+              onClick={() => console.log('Register User Card Clicked')}
             />
           </motion.div>
           <motion.div
@@ -81,13 +99,21 @@ export default function Home() {
             variants={cardVariants}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Card
+            <MultiActionAreaCard
               image="https://media.istockphoto.com/id/1397317693/vector/user-group-and-management-business-team-check-mark-sign-check-mark-person-vector-illustration.jpg?s=612x612&w=0&k=20&c=V1UUiXrdq89Fxn_Q-pRb2E2nyu6eM_WzDZDUwdZ5LS4="
               title="Mark Attendance"
+              description=""
+              onClick={handleDialogOpen}
             />
           </motion.div>
         </div>
       </div>
+
+      <CustomizedDialogs
+        open={dialogOpen}
+        handleClose={handleDialogClose}
+        handleSave={handleSaveChanges}
+      />
     </div>
   );
 }
