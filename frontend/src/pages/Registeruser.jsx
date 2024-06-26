@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Appbar from '../components/Appbar';
+import Successmsg from '../components/Successmsg.jsx';
 
 const Registeruser = () => {
     const [newUsername, setNewUsername] = useState('');
     const [newUserId, setNewUserId] = useState('');
+    const [newUserSucess, setUserSucess] = useState(false);
     const [totalUsers, setTotalUsers] = useState(0);
 
     useEffect(() => {
@@ -42,7 +44,8 @@ const Registeruser = () => {
                 // Handle successful response
                 console.log('User added successfully');
                 // Refresh the page
-                window.location.reload();
+                setUserSucess(true);
+                //window.location.reload();
             } else {
                 // Handle error response
                 console.error('Failed to add user');
@@ -55,6 +58,7 @@ const Registeruser = () => {
     return (
         <div className="bg-[#c9c7c7] p-4">
             <Appbar />
+
             <div className="flex justify-center items-center h-screen bg-[#c9c7c7]">
                 <div className="bg-black bg-opacity-80 rounded-2xl p-0 m-2 h-96 w-96">
                     <form onSubmit={handleSubmit} className="flex flex-col items-center">
@@ -94,6 +98,9 @@ const Registeruser = () => {
                         <h5 className="text-white py-6">
                             <i>Total Users in Database: {totalUsers}</i>
                         </h5>
+                        <div className='py-6'>
+                            {newUserSucess && <Successmsg />}</div>
+
                     </form>
                 </div>
             </div>
