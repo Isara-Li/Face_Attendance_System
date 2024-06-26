@@ -17,7 +17,7 @@ export default function MultiActionAreaCard({ image, title, description, onClick
                     sx={{ width: '100%', height: '200px', objectFit: 'cover' }} // Set fixed height and width
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h5" component="div" textAlign={'center'}>
                         {title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -26,7 +26,7 @@ export default function MultiActionAreaCard({ image, title, description, onClick
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                {/* You can add action buttons here if needed */}
+    
             </CardActions>
         </Card>
     );

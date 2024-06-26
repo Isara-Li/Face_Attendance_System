@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Appbar from '../components/Appbar';
 import Successmsg from '../components/Successmsg.jsx';
+import MultiActionAreaCard from '../components/MultiActionAreaCard.js';
 
 const Registeruser = () => {
     const [newUsername, setNewUsername] = useState('');
@@ -100,6 +101,13 @@ const Registeruser = () => {
                         </h5>
                         <div className='py-6'>
                             {newUserSucess && <Successmsg />}</div>
+                        {newUserSucess && <MultiActionAreaCard
+                            image=""
+                            title={newUsername}
+                            description={newUserId}
+
+                        />}
+
 
                     </form>
                 </div>
