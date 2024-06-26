@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Appbar from '../components/Appbar';
 import MultiActionAreaCard from '../components/MultiActionAreaCard'; // Ensure the import path is correct
 import CustomizedDialogs from '../components/CustomizedDialogs'; // Ensure the import path is correct
@@ -11,14 +10,6 @@ export default function Home() {
   const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handleAddUser = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/start');
-      console.log('Response:', response.data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
 
   const handleDialogOpen = () => {
     setDialogOpen(true);

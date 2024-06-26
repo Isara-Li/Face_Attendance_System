@@ -1,14 +1,17 @@
 import cv2
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,jsonify
 from datetime import date
 from datetime import datetime
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import joblib
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 
 nimgs = 10
 
@@ -31,8 +34,13 @@ if f'Attendance-{datetoday}.csv' not in os.listdir('Attendance'):
     with open(f'Attendance/Attendance-{datetoday}.csv', 'w') as f:
         f.write('Name,Roll,Time')
 
+@app.route('/getusers', methods=['GET'])
 def totalreg():
-    return len(os.listdir('static/faces'))
+    try:
+        user_count = len(os.listdir('static/faces'))
+        return jsonify({"total": user_count})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 def extract_faces(img):
     try:
@@ -136,38 +144,50 @@ def start():
 
 
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['POST'])
 def add():
     newusername = request.form['newusername']
     newuserid = request.form['newuserid']
-    userimagefolder = 'static/faces/'+newusername+'_'+str(newuserid)
+    userimagefolder = f'static/faces/{newusername}_{newuserid}'
+
     if not os.path.isdir(userimagefolder):
         os.makedirs(userimagefolder)
+
     i, j = 0, 0
+    nimgs = 10  # Number of images to capture
     cap = cv2.VideoCapture(0)
-    while 1:
+
+    while True:
         _, frame = cap.read()
-        faces = extract_faces(frame)
+        faces = extract_faces(frame) 
+
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 20), 2)
             cv2.putText(frame, f'Images Captured: {i}/{nimgs}', (30, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 20), 2, cv2.LINE_AA)
+
             if j % 5 == 0:
-                name = newusername+'_'+str(i)+'.jpg'
-                cv2.imwrite(userimagefolder+'/'+name, frame[y:y+h, x:x+w])
+                name = f'{newusername}_{i}.jpg'
+                cv2.imwrite(os.path.join(userimagefolder, name), frame[y:y+h, x:x+w])
                 i += 1
+
             j += 1
-        if j == nimgs*5:
+
+        if j == nimgs * 5:
             break
+
         cv2.imshow('Adding new User', frame)
-        if cv2.waitKey(1) == 27:
+        if cv2.waitKey(1) == 27:  # Press 'Esc' to exit
             break
+
     cap.release()
     cv2.destroyAllWindows()
+
     print('Training Model')
-    train_model()
-    names, rolls, times, l = extract_attendance()
-    return render_template('home.html', names=names, rolls=rolls, times=times, l=l, totalreg=totalreg(), datetoday2=datetoday2)
+    train_model()  
+    names, rolls, times, l = extract_attendance()  
+
+    return jsonify(success=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=5000)
