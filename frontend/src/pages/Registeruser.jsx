@@ -57,10 +57,9 @@ const Registeruser = () => {
     };
 
     return (
-        <div className="bg-[#c9c7c7] p-4">
+        <div className="min-h-screen flex flex-col">
             <Appbar />
-
-            <div className="flex justify-center items-center h-screen bg-[#c9c7c7]">
+            <div className="flex justify-center items-center flex-grow">
                 <div className="bg-black bg-opacity-80 rounded-2xl p-0 m-2 h-96 w-96">
                     <form onSubmit={handleSubmit} className="flex flex-col items-center">
                         <h2 className="bg-pink-600 text-white rounded-t-2xl py-2 px-4 w-full text-center">
@@ -100,15 +99,15 @@ const Registeruser = () => {
                             <i>Total Users in Database: {totalUsers}</i>
                         </h5>
                         <div className='py-6'>
-                            {newUserSucess && <Successmsg />}</div>
-                        {newUserSucess && <MultiActionAreaCard
-                            image={`./static/faces/${newUsername}_${newUserId}`}
-                            title={newUsername}
-                            description={newUserId}
-
-                        />}
-
-
+                            {newUserSucess && <Successmsg />}
+                        </div>
+                        <div>
+                            {newUserSucess && <MultiActionAreaCard
+                                image="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
+                                title={newUsername}
+                                description={newUserId}
+                            />}
+                        </div>
                     </form>
                 </div>
             </div>

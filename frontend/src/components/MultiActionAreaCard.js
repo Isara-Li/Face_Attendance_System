@@ -20,7 +20,7 @@ export default function MultiActionAreaCard({ image, title, description, onClick
                     <Typography gutterBottom variant="h5" component="div" textAlign={'center'}>
                         {title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" textAlign={'center'}>
                         {description}
                     </Typography>
                 </CardContent>

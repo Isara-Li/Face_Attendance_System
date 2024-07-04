@@ -80,7 +80,7 @@ export default function Home() {
               image="https://cdn2.vectorstock.com/i/1000x1000/52/91/user-icon-human-person-sign-vector-10725291.jpg"
               title="Register User"
               description=""
-              onClick={() => console.log('Register User Card Clicked')}
+              onClick={handleDialogOpen}
             />
           </motion.div>
           <motion.div
@@ -94,7 +94,7 @@ export default function Home() {
               image="https://media.istockphoto.com/id/1397317693/vector/user-group-and-management-business-team-check-mark-sign-check-mark-person-vector-illustration.jpg?s=612x612&w=0&k=20&c=V1UUiXrdq89Fxn_Q-pRb2E2nyu6eM_WzDZDUwdZ5LS4="
               title="Mark Attendance"
               description=""
-              onClick={handleDialogOpen}
+              onClick={() => console.log('Mark attendence Clicked')}
             />
           </motion.div>
         </div>
