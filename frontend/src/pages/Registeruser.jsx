@@ -102,7 +102,7 @@ const Registeruser = () => {
                         <div className='py-6'>
                             {newUserSucess && <Successmsg />}</div>
                         {newUserSucess && <MultiActionAreaCard
-                            image=""
+                            image={`./static/faces/${newUsername}_${newUserId}`}
                             title={newUsername}
                             description={newUserId}
 
