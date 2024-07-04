@@ -15,6 +15,10 @@ export default function Home() {
     setDialogOpen(true);
   };
 
+  const handeMark = () => {
+    navigate('/mark');
+  };
+
   const handleDialogClose = () => {
     setDialogOpen(false);
   };
@@ -94,7 +98,7 @@ export default function Home() {
               image="https://media.istockphoto.com/id/1397317693/vector/user-group-and-management-business-team-check-mark-sign-check-mark-person-vector-illustration.jpg?s=612x612&w=0&k=20&c=V1UUiXrdq89Fxn_Q-pRb2E2nyu6eM_WzDZDUwdZ5LS4="
               title="Mark Attendance"
               description=""
-              onClick={() => console.log('Mark attendence Clicked')}
+              onClick={handeMark}
             />
           </motion.div>
         </div>

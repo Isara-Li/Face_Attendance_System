@@ -14,6 +14,7 @@ const Registeruser = () => {
         const fetchTotalUsers = async () => {
             try {
                 const response = await fetch('http://127.0.0.1:5000/getusers');
+                console.log(response)
                 if (response.ok) {
                     const data = await response.json();
                     setTotalUsers(data.total); // Assuming the backend returns { total: number }

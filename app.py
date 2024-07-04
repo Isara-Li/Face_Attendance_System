@@ -71,12 +71,26 @@ def train_model():
     joblib.dump(knn, 'static/face_recognition_model.pkl')
 
 def extract_attendance():
+    print("Isara")
     df = pd.read_csv(f'Attendance/Attendance-{datetoday}.csv')
     names = df['Name']
     rolls = df['Roll']
     times = df['Time']
     l = len(df)
     return names, rolls, times, l
+
+@app.route('/getattendance', methods=['GET'])
+def get_attendance():
+    try:
+        names, rolls, times, l = extract_attendance()
+        return jsonify({
+            "names": names.tolist(),
+            "rolls": rolls.tolist(),
+            "times": times.tolist(),
+            "length": l
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 def add_attendance(name):
     username = name.split('_')[0]
@@ -116,6 +130,7 @@ def start():
 
     ret = True
     identified_person = None
+    count = 0
     cap = cv2.VideoCapture(0)
     while ret:
         ret, frame = cap.read()
@@ -125,17 +140,20 @@ def start():
             cv2.rectangle(frame, (x, y), (x+w, y-40), (86, 32, 251), -1)
             face = cv2.resize(frame[y:y+h, x:x+w], (50, 50))
             identified_person = identify_face(face.reshape(1, -1))[0]
-            #add_attendance(identified_person)
+            
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 1)
             cv2.rectangle(frame,(x,y),(x+w,y+h),(50,50,255),2)
             cv2.rectangle(frame,(x,y-40),(x+w,y),(50,50,255),-1)
             cv2.putText(frame, f'{identified_person}', (x,y-15), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 1)
             cv2.rectangle(frame, (x,y), (x+w, y+h), (50,50,255), 1)
+            if identified_person and count < 10 :
+                identified_person_out = identified_person
         imgBackground[162:162 + 480, 55:55 + 640] = frame
         cv2.imshow('Attendance', imgBackground)
+        count += 1
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-    add_attendance(identified_person)
+    add_attendance(identified_person_out)
     cap.release()
     cv2.destroyAllWindows()
 
