@@ -71,13 +71,38 @@ def train_model():
     joblib.dump(knn, 'static/face_recognition_model.pkl')
 
 def extract_attendance():
-    print("Isara")
+
     df = pd.read_csv(f'Attendance/Attendance-{datetoday}.csv')
     names = df['Name']
     rolls = df['Roll']
     times = df['Time']
     l = len(df)
     return names, rolls, times, l
+
+def extract_attendance_by_date(date_str):
+    try:
+        formatted_date = datetime.strptime(date_str, "%Y-%m-%d").strftime("%m_%d_%y")
+        df = pd.read_csv(f'Attendance/Attendance-{formatted_date}.csv')
+        names = df['Name'].tolist()
+        rolls = df['Roll'].tolist()
+        times = df['Time'].tolist()
+        length = len(df)
+        return names, rolls, times, length
+    except Exception as e:
+        raise ValueError(f"Error fetching attendance for {date_str}: {str(e)}")
+
+@app.route('/getattendancebydate', methods=['GET'])
+def get_attendance_by_date():
+    date_str = request.args.get('date')
+    try:
+        if not date_str:
+            return jsonify({"error": "Date is required"}), 400
+
+        names, rolls, times, length = extract_attendance_by_date(date_str)
+        return jsonify(names=names, rolls=rolls, times=times, length=length)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 500
+
 
 @app.route('/getattendance', methods=['GET'])
 def get_attendance():

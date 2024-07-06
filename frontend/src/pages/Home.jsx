@@ -81,7 +81,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <MultiActionAreaCard
-              image="https://cdn2.vectorstock.com/i/1000x1000/52/91/user-icon-human-person-sign-vector-10725291.jpg"
+              image="https://www.webiconio.com/_upload/255/image_255.svg"
               title="Register User"
               description=""
               onClick={handleDialogOpen}

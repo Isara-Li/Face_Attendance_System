@@ -27,7 +27,7 @@ export default function CustomizedDialogs({ open, handleClose, handleSave }) {
             open={open}
         >
             <DialogTitle className="text-red-700" sx={{ m: 0, p: 2 }} textAlign={'center'} id="customized-dialog-title">
-                Alert !
+                ALERT !
             </DialogTitle>
             <IconButton
                 aria-label="close"
@@ -47,23 +47,23 @@ export default function CustomizedDialogs({ open, handleClose, handleSave }) {
                 </Typography>
                 <Typography gutterBottom>
 
-                    The next page will take photos of your face to register you into the system.
+                    ○  The next page will take photos of your face to register you into the system.
                 </Typography>
                 <Typography gutterBottom>
 
-                    Please ensure that your face is clearly visible to the camera.
+                    ○ Please ensure that your face is clearly visible to the camera.
                 </Typography>
                 <Typography gutterBottom>
 
-                    Make sure that there are no masks, sunglasses, or any other coverings on your face that could obstruct the camera's view. This will help the system accurately recognize and register your facial features.
+                    ○  Make sure that there are no masks, sunglasses, or any other coverings on your face that could obstruct the camera's view.
                 </Typography>
                 <Typography gutterBottom>
-                    If you are ready to proceed, click on the 'Register' button below.
+                    ○   If you are ready to proceed, click on the 'Register' button below.
                 </Typography>
             </DialogContent>
             <DialogActions>
                 <Button autoFocus onClick={handleSave}>
-                    Register
+                    Proceed
                 </Button>
             </DialogActions>
         </BootstrapDialog>
