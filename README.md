@@ -38,13 +38,13 @@ This project is a Face Attendance System that leverages advanced machine learnin
 
 1\. **Clone the Repository:**
 
-   ```bash
+```bash
 
-   git clone https://github.com/your-repo/face-attendance-system.git
+   git clone https://github.com/Isara-Li/Face_Attendance_System.git
 
    cd face-attendance-system
 
-   ```
+```
 
 2\. **Backend Setup:**
 
@@ -52,45 +52,44 @@ This project is a Face Attendance System that leverages advanced machine learnin
 
    - Install the required packages:
 
-     ```bash
+```bash
 
      pip install -r requirements.txt
-
-     ```
+```
 
    - Run the Flask server:
 
-     ```bash
+```bash
 
      python app.py
 
-     ```
+```
 
 3\. **Frontend Setup:**
 
    - Navigate to the frontend directory:
 
-     ```bash
+```bash
 
      cd frontend
 
-     ```
+```
 
    - Install the required packages:
 
-     ```bash
+```bash
 
      npm install
 
-     ```
+```
 
    - Start the React application:
 
-     ```bash
+```bash
 
      npm start
 
-     ```
+```
 
 4\. **Access the Application:**
 
