@@ -38,7 +38,7 @@ This project is a Face Attendance System that leverages advanced machine learnin
 
 1\. **Clone the Repository:**
 
-   ``` bash
+   ```bash
 
    git clone https://github.com/your-repo/face-attendance-system.git
 
