@@ -38,13 +38,13 @@ This project is a Face Attendance System that leverages advanced machine learnin
 
 1\. **Clone the Repository:**
 
-```bash
+   ```bash
 
    git clone https://github.com/Isara-Li/Face_Attendance_System.git
 
    cd face-attendance-system
 
-```
+ ```
 
 2\. **Backend Setup:**
 
