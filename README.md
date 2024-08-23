@@ -4,6 +4,10 @@
 
 This project is a Face Attendance System that leverages advanced machine learning algorithms for facial recognition and attendance tracking. It consists of a Python backend using Flask, OpenCV, and machine learning libraries, along with a React frontend for a user-friendly interface.
 
+
+https://github.com/user-attachments/assets/47e9e2c2-c335-46b2-a305-8263c87722ad
+
+
 #### Features
 
 1\. **Real-time Face Detection and Recognition:**
