@@ -166,12 +166,8 @@ def start():
             face = cv2.resize(frame[y:y+h, x:x+w], (50, 50))
             identified_person = identify_face(face.reshape(1, -1))[0]
             
-            cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 1)
-            cv2.rectangle(frame,(x,y),(x+w,y+h),(50,50,255),2)
-            cv2.rectangle(frame,(x,y-40),(x+w,y),(50,50,255),-1)
             cv2.putText(frame, f'{identified_person}', (x,y-15), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 1)
-            cv2.rectangle(frame, (x,y), (x+w, y+h), (50,50,255), 1)
-            if identified_person and count < 10 :
+            if identified_person:
                 identified_person_out = identified_person
         imgBackground[162:162 + 480, 55:55 + 640] = frame
         cv2.imshow('Attendance', imgBackground)
